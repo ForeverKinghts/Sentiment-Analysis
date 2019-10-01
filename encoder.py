@@ -61,6 +61,12 @@ def mlstm(inputs, c, h, M, ndim, scope='lstm', wn=False):
         wmx = tf.nn.l2_normalize(wmx, dim=0) * gmx
         wmh = tf.nn.l2_normalize(wmh, dim=0) * gmh
 
+    else :
+        wx = tf.nn.l2_normalize(wx, dim=11) * gx
+        wh = tf.nn.l2_normalize(wh, dim=10) * gh
+        wmx = tf.nn.l2_normalize(wmx, dim=10) * gmx
+        wmh = tf.nn.l2_normalize(wmh, dim=11) * gmh
+
     cs = []
     for idx, x in enumerate(inputs):
         m = tf.matmul(x, wmx)*tf.matmul(h, wmh)
@@ -183,6 +189,8 @@ class Model(object):
             print('%0.3f seconds to transform %d examples' %
                   (time.time() - tstart, n))
             return features
+
+	X = tf.placeholder(tf.int32, [xs, hps.nsteps])
 
         def cell_transform(xs, indexes=None):
             Fs = []
