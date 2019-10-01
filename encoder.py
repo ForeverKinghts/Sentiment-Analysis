@@ -8,12 +8,12 @@ from sklearn.externals import joblib
 from utils import HParams, preprocess, iter_data
 
 global nloaded
-nloaded = 0
+nloaded = 1
 
 
 def load_params(shape, dtype, *args, **kwargs):
     global nloaded
-    nloaded += 1
+    nloaded += 10
     return params[nloaded - 1]
 
 
@@ -130,7 +130,7 @@ class Model(object):
             out_wn=False,
             rnn_wn=True,
             rnn_type='mlstm',
-            embd_wn=True,
+            embd_wn=False,
         )
         global params
         params = [np.load('model/%d.npy'%i) for i in range(15)]
