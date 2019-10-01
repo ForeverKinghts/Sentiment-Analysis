@@ -128,7 +128,7 @@ class Model(object):
         hps = HParams(
             load_path='model_params/params.jl',
             nhidden=4096,
-            nembd=64,
+            nembd=128,
             nsteps=nsteps,
             nbatch=nbatch,
             nstates=2,
